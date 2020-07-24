@@ -26,6 +26,7 @@
                 this.Soanthao = "";
                 this.HtD = [];
                 this.HtDi = [];
+                this.check = false;
             }
 
 
@@ -57,11 +58,13 @@
 
 
             turnOff() {
+                this.check = false;
                 document.getElementById(this.idMobile).innerHTML = `Điện thoại chưa bật <br/>
                 <button onclick=(${this.name}.turnOn())>ON</button>`;
             }
 
             turnOn() {
+                this.check = true;
                 this.display();
 
             }
@@ -96,9 +99,12 @@
                 this.Soanthao = document.getElementById(this.idSTN).value;
                 document.getElementById(this.idSTN).value = "";
                 this.decreasePin();
-                this.HtDi.push(this.Soanthao);
-                this.mobile.decreasePin();
-                this.mobile.HtD.push(this.Soanthao);
+                if (this.mobile.check) {
+                    this.HtDi.push(this.Soanthao);
+                    this.mobile.decreasePin();
+                    this.mobile.HtD.push(this.Soanthao);
+                }
+
 
 
             }
