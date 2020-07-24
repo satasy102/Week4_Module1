@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game đơn giản - di chuyển đối tượng</title>
+    <script>
+        class Hero {
+            constructor(image, top, left, size) {
+                this.image = image;
+                this.top = top;
+                this.left = left;
+                this.size = size;
+            }
+
+            getHeroElement() {
+                return `<img src="./${this.image}" style="top:${this.top}px;left:${this.left}px;position:absolute;" />`
+            }
+
+            moveRight() {
+                this.left += 20;
+            }
+            moveDown() {
+                this.top += 20;
+            }
+            moveLeft() {
+                this.left -= 20;
+            }
+            moveUp() {
+                this.top -= 20;
+            }
+
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <div id="game">
+    </div>
+</body>
+<script>
+    let toP = 20;
+    let lefT = 30;
+    let sizE = 200;
+    let hero = new Hero('pikachu.png', toP, lefT, sizE);
+    let maxWidth = window.innerWidth - hero.size;
+    let maxHeight = window.innerHeight - hero.size;
+
+    function start() {
+        document.getElementById('game').innerHTML = hero.getHeroElement();
+        setTimeout(start, 10)
+        if (hero.left < maxWidth && hero.top <= toP) {
+            hero.moveRight();
+        } else if (hero.top < maxHeight && hero.left >= maxWidth) {
+            hero.moveDown();
+        } else if (hero.left > lefT) {
+            hero.moveLeft();
+        } else if (hero.top > toP && hero.left <= lefT) {
+            hero.moveUp();
+        }
+
+    }
+
+    start();
+</script>
+
+</html>

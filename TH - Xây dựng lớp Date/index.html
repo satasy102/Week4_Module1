@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xây dựng lớp Date</title>
+    <script>
+        class Mydate {
+            constructor(day, month, year) {
+                this.day = day;
+                this.month = month;
+                this.year = year;
+            }
+            getday() {
+                return this.day;
+            }
+            getmonth() {
+                return this.month;
+            }
+            getyear() {
+                return this.year;
+            }
+            getdate() {
+                return this.date;
+            }
+            setday(day) {
+                this.day = day;
+            }
+            setmonth(month) {
+                this.month = month;
+            }
+            setyear(year) {
+                this.year = year;
+            }
+            setdate(day, month, year) {
+                this.day = day
+                this.month = month;
+                this.year = year;
+            }
+            toString() {
+                return this.day + '/' + this.month + '/' + this.year;
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <script>
+        let date = new Mydate(7, 4, 1995);
+        let day = date.getday();
+        let month = date.getmonth();
+        let year = date.getyear();
+        alert("1: " + day + '/' + month + '/' + year);
+        date.setday(10);
+        date.setmonth(10);
+        date.setyear(2019);
+        alert('2: ' + date.getday() + "/" + date.getmonth() + "/" + date.getyear());
+        date.setdate('04', '04', '2014');
+        alert('3: ' + date.toString());
+
+
+    </script>
+</body>
+
+</html>

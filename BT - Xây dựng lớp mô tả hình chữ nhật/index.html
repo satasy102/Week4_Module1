@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xây dựng lớp mô tả hình chữ nhật</title>
+    <script>
+        class hinhChuNhat {
+            constructor(chieudai, chieurong) {
+                this.chieudai = chieudai;
+                this.chieurong = chieurong;
+            }
+            getChieudai() {
+                return this.chieudai;
+            }
+            getChieurong() {
+                return this.chieurong;
+            }
+            setChieudai(chieudai) {
+                this.chieudai = chieudai;
+            }
+            setChieurong(chieurong) {
+                this.chieurong = chieurong;
+            }
+            getDientich() {
+                return this.chieudai * this.chieurong;
+            }
+            getChuvi() {
+                return (this.chieudai + this.chieurong) * 2;
+            }
+            getHinhChuNhat() {
+                let canvas = document.getElementById('chunhat');
+                let context = canvas.getContext('2d');
+
+                context.rect(100, 100, this.chieudai, this.chieurong);
+                context.stroke();
+
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <canvas id="chunhat" width="1330px" height="635px" style="border:1px solid #d3d3d3;">
+</body>
+<script>
+    let chuNhat1 = new hinhChuNhat(200, 100);
+    let area = chuNhat1.getDientich();
+    let chuvi = chuNhat1.getChuvi();
+    alert('Diện tích: ' + area);
+    alert('Chu vi: ' + chuvi);
+    chuNhat1.getHinhChuNhat()
+</script>
+
+</html>

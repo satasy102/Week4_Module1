@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xây dựng lớp mô tả điện thoại</title>
+
+</head>
+
+<body>
+    <div id='display'></div>
+
+    <script>
+        class Mobile {
+            constructor(name, idPin, idSTN, idHTD, idHTDi, pin) {
+                this.name = name;
+                this.idSTN = idSTN;
+                this.idHTD = idHTD;
+                this.idHTDi = idHTDi;
+                this.idPin = idPin;
+                this.pin = pin;
+                this.Soanthao = "";
+                this.HtD = [];
+                this.HtDi = [];
+
+            }
+
+            getIdSTN() {
+                return this.idSTN;
+            }
+            getIdHTD() {
+                return this.idHTD;
+            }
+            getIdHTDi() {
+                return this.idHTDi;
+            }
+            getIdPin() {
+                return this.idPin;
+            }
+            getpin() {
+                return this.pin;
+            }
+
+            check() { }
+
+            startus() { }
+
+            display() {
+
+                document.getElementById('display').innerHTML += `<div style="width:500;height: auto;">
+                <label>${this.name}</label><br />
+                <div id='${this.idPin}'>Pin: ${this.pin}</div>
+                <textarea id='${this.idSTN}' rows="4" value="" cols="50"></textarea><br />`;
+                document.getElementById('display').innerHTML += `
+                <input type="button" value="Gửi" onclick="${this.name}.gui()"/><br />
+                <span id='${this.idHTD}'>Hộp thư đến</span><br />
+                <span id='${this.idHTDi}'>Hộp thư đi</span><br />
+                <input type="button" value="Cắm sạc" onclick="${this.name}.sacpin()" /> <br/> 
+                </div>`;
+
+            }
+            soantinnhan() {
+                this.Soanthao = document.getElementById(this.idSTN).value;
+            }
+
+            gui() {
+                this.pin--;
+                this.HtDi.push(this.Soanthao);
+                document.getElementById(this.idSTN).value = "";
+                document.getElementById(this.idPin).innerHTML = 'Pin: ' + this.pin;
+            }
+
+            nhan() { }
+
+            sacpin() {
+                if (this.pin < 100) {
+                    this.pin++;
+                    document.getElementById(this.idPin).innerHTML = 'Pin: ' + this.pin;
+                    setTimeout(() => this.sacpin(), 100);
+                }
+            }
+        }
+        let pin1 = pin2 = 10;
+        let samsung = new Mobile("samsung", 'pin1', 'soantinnhan1', 'hopthuden1', 'hopthudi1', pin1);
+        samsung.display();
+        let nokia = new Mobile("nokia", 'pin2', 'soantinnhan2', 'hopthuden2', 'hopthudi2', pin2);
+        nokia.display();
+
+
+    </script>
+</body>
+
+</html>

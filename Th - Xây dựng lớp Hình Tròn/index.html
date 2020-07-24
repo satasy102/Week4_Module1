@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xây dựng lớp Hình Tròn</title>
+    <script>
+        class Circle {
+            constructor(radius) {
+                this.radius = radius;
+            }
+            getRadius() {
+                return this.radius;
+            }
+            getArea() {
+                return Math.PI * this.radius * this.radius;
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <script>
+        let circle1 = new Circle(2);
+        let radius1 = circle1.getRadius();
+        let area1 = circle1.getArea();
+        document.write("Radius1: " + radius1 + "; Area1: " + area1 + '<br/>');
+        let circle2 = new Circle(4);
+        let radius2 = circle2.getRadius();
+        let area2 = circle2.getArea();
+        document.write("Radius2: " + radius2 + "; Area2: " + area2);
+    </script>
+</body>
+
+</html>

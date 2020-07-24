@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xây dựng lớp mô tả Temperature</title>
+    <script>
+        class Temperature {
+            constructor(c) {
+                this.c = c;
+            }
+            getF() {
+                return 9 / 5 * c + 32;
+            }
+            getK() {
+                return c + 273;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <script>
+        let c = +prompt('Nhập nhiệt độ C: ');
+        let nhietdo = new Temperature(c);
+        let f = nhietdo.getF();
+        let k = nhietdo.getK();
+        document.write(c + ' độ C= ' + f + ' độ F <br/>');
+        document.write(c + ' độ C= ' + k + ' độ K');
+
+    </script>
+</body>
+
+</html>

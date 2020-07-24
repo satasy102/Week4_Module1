@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phát triển ứng dụng nhỏ mô phỏng câu chuyện Adam và Eva</title>
+    <script>
+        class Apple {
+            constructor(weight) {
+                this.weight = weight;
+            }
+
+            decrease() {
+                this.weight--;
+            }
+
+            isEmpty() {
+                if (this.weight > 0) { return false; } else return true;
+            }
+
+            getWeight() {
+                return this.weight;
+            }
+        }
+
+        class Human {
+            constructor(name, gender, weight) {
+                this.name = name;
+                this.gender = gender;
+                this.weight = weight;
+
+            }
+
+            isMale() { if (this.gender) { return true; } else return false }
+
+            setGender(a) { this.gender = a }
+
+            checkApple(apple) {
+                this.Apple = apple;
+                if (this.Apple.getWeight() > 0) { return true } else return false;
+            }
+
+            eat(apple) {
+                if (this.checkApple(apple)) {
+                    this.Apple.decrease();
+                    this.weight++;
+                }
+            }
+
+            say(a) { (this.isMale()) ? console.log(a) : console.log(a) }
+
+            getName() { return this.name }
+
+            setName(name) { this.name = name }
+
+            getWeight() { return this.weight }
+
+            setWeight(a) { this.weigh = a }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="boy" style="width:50vw; height:30vh;"></div>
+    <button onclick="naman()" style="border:'2px'; width:400px; height:50px">Nam</button>
+    <div id="apple" style="text-align: center;width:100vw; height:10vh;">APPLE</div>
+    <div id="nu" style="width:50vw; height:30vh;"></div>
+    <button id="girl" onclick="nuan()" style="border:'2px'; width:400px; height:50px">Nữ</button>
+    <script>
+        let apple = new Apple(10),
+            nam = new Human('Hoàng', true, 60),
+            nu = new Human('Vợ Hoàng', false, 45),
+            check = true;
+
+        function naman() {
+            if (check) { nam.eat(apple); check = false; }
+            document.getElementById('apple').innerHTML = 'APPLE <br />' + apple.getWeight();
+            document.getElementById('boy').innerHTML = 'Anh tên là: ' + nam.getName() +
+                '<br/> Giới tính: ' + nam.gender + '<br/> Nặng: ' + nam.weight;
+        }
+        function nuan() {
+            if (!check) { nu.eat(apple); check = true; }
+            document.getElementById('apple').innerHTML = 'APPLE <br />' + apple.getWeight();
+            document.getElementById('nu').innerHTML = 'Em tên là: ' + nu.getName() +
+                '<br/> Giới tính: ' + nu.gender + '<br/> Nặng: ' + nu.weight;
+        }
+        document.getElementById('boy').innerHTML = 'Anh tên là: ' + nam.getName() +
+            '<br/> Giới tính: ' + nam.gender + '<br/> Nặng: ' + nam.weight;
+        document.getElementById('apple').innerHTML += '<br />' + apple.getWeight();
+        document.getElementById('nu').innerHTML = 'Em tên là: ' + nu.getName() +
+            '<br/> Giới tính: ' + nu.gender + '<br/> Nặng: ' + nu.weight;
+
+    </script>
+</body>
+
+</html>

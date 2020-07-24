@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funny circles</title>
+    <script>
+        class Circle {
+            constructor(x, y, radius) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+            }
+
+        }
+        function getRandomHex() {
+            return parseInt(Math.random() * 255);
+        }
+
+        function getRandomColor() {
+            var red = getRandomHex();
+            var yellow = getRandomHex();
+            var blue = getRandomHex();
+            return "rgb(" + red + "," + blue + "," + yellow + ")";
+        }
+        function createCircle() {
+            var context = document.getElementById("myCanvas").getContext("2d");
+            var circle = new Circle(110, 315, 100);
+            context.beginPath();
+            context.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2, false);
+            context.stroke();
+            context.fill();
+            context.closePath();
+
+            context.beginPath();
+            var radius = Math.floor(Math.random() * 100);
+            var circle = new Circle(350, 315, radius);
+            context.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2, false);
+            context.stroke();
+            context.fill();
+            context.closePath();
+
+            context.beginPath();
+            var radius = Math.floor(Math.random() * 100);
+            var circle = new Circle(650, 315, radius);
+            var color = getRandomColor();
+            context.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2, false);
+            context.stroke();
+            context.fillStyle = color;
+            context.fill();
+            context.closePath();
+
+            context.beginPath();
+            var radius = Math.floor(Math.random() * 100);
+            var color = getRandomColor();
+            var x = Math.random() * window.innerWidth;
+            var y = Math.random() * window.innerHeight;
+            var circle = new Circle(x, y, radius);
+            context.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2, false);
+            context.stroke();
+            context.fillStyle = color;
+            context.fill();
+            context.closePath();
+        }
+        function createMultipleCircle() {
+            for (var i = 0; i < 30; i++) {
+                createCircle();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="1330px" height="635px" style="border:1px solid #d3d3d3;">
+</body>
+
+<script>
+    createCircle();
+    createMultipleCircle();
+
+</script>
+
+</html>

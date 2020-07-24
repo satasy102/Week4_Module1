@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phát triển game lái xe</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+        }
+
+        canvas {
+            position: relative;
+        }
+
+        img {
+            position: absolute;
+            left: 600px;
+            top: 300px;
+        }
+    </style>
+    <script>
+        class Car {
+            constructor(image, top, left) {
+                this.image = image;
+                this.top = top;
+                this.left = left;
+
+            }
+
+            getCarElement() {
+                return `<img src="./${this.image}" style="top:${this.top}px;left:${this.left}px;position:absolute;" />`
+            }
+
+            moveRight() {
+                this.left += 20;
+            }
+            moveDown() {
+                this.top += 20;
+            }
+            moveLeft() {
+                this.left -= 20;
+            }
+            moveUp() {
+                this.top -= 20;
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="1330px" height="640" style="border:5px solid black;"></canvas>
+</body>
+<script>
+    let car = new Car('Xe.png', 600, 300);
+</script>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xây dựng lớp mô phỏng sự hoạt động của đèn pin</title>
+</head>
+<script>
+    class Battery {
+        constructor(energy) {
+            this.energy = energy;
+        }
+
+        getEnergy() {
+            return this.energy;
+        }
+        decreaseEnergy() {
+            if (this.energy > 0) {
+                this.energy--;
+            }
+        }
+    }
+    class FlashLamp {
+        isOnInterval;
+        constructor(battery) {
+            this.battery = battery;
+        }
+        getBattery() {
+            return this.battery;
+        }
+        getBatteryInfo() {
+            return this.battery.getEnergy();
+        }
+        turnOnFlash() {
+            if (this.getBatteryInfo() > 0) {
+                document.getElementById('flash').innerHTML = "Lighting";
+                document.getElementById('batteryinfo').innerHTML = "Battery info:" + this.getBatteryInfo();
+                this.isOnInterval = setInterval(() => {
+                    document.getElementById('flash').innerHTML = "Lighting";
+                    this.getBattery().decreaseEnergy();
+                    document.getElementById('batteryinfo').innerHTML = "Battery info:" + this.getBatteryInfo();
+                    if (this.getBatteryInfo() == 0) {
+                        document.getElementById('flash').innerHTML = " Not Lighting";
+                        clearInterval(this.isOnInterval);
+                    }
+                }, 1000);
+            } else if (this.getBatteryInfo() == 0) {
+                document.getElementById('flash').innerHTML = " Not Lighting";
+                document.getElementById('batteryinfo').innerHTML = "Battery info:" + this.getBatteryInfo();
+            }
+        }
+        turnOffFlash() {
+            clearInterval(this.isOnInterval);
+            document.getElementById('flash').innerHTML = "Not Lighting";
+            document.getElementById('batteryinfo').innerHTML = "Battery info:" + this.getBatteryInfo();
+        }
+    }
+</script>
+
+<body>
+    <span id="flash"></span> <br />
+    <span id="batteryinfo"></span><br />
+    <input type="button" value="ON" onclick="flashLamp.turnOnFlash() " />
+    <input type="button" value="OFF" onclick="flashLamp.turnOffFlash()" />
+
+    <script>
+        let batatery = new Battery(10);
+        let flashLamp = new FlashLamp(batatery);
+    </script>
+</body>
+
+</html>
