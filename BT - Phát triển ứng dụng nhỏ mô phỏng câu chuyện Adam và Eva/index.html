@@ -12,7 +12,7 @@
             }
 
             decrease() {
-                this.weight--;
+                return this.weight--;
             }
 
             isEmpty() {
@@ -38,7 +38,7 @@
 
             checkApple(apple) {
                 this.Apple = apple;
-                if (this.Apple.getWeight() > 0) { return true } else return false;
+                if (this.Apple.isEmpty()) { return false } else return true;
             }
 
             eat(apple) {

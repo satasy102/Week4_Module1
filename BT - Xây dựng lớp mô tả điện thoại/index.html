@@ -9,12 +9,15 @@
 </head>
 
 <body>
-    <div id='display'></div>
+    <div id='mobile1' style="width:500px; height:300px"> </div>
+    <div id='mobile2' style="width:500px; height:300px"></div>
 
     <script>
         class Mobile {
-            constructor(name, idPin, idSTN, idHTD, idHTDi, pin) {
+            constructor(name, idMobile, idhienthi, idPin, idSTN, idHTD, idHTDi, pin) {
                 this.name = name;
+                this.idMobile = idMobile;
+                this.idhienthi = idhienthi;
                 this.idSTN = idSTN;
                 this.idHTD = idHTD;
                 this.idHTDi = idHTDi;
@@ -23,71 +26,103 @@
                 this.Soanthao = "";
                 this.HtD = [];
                 this.HtDi = [];
-
             }
 
-            getIdSTN() {
-                return this.idSTN;
-            }
-            getIdHTD() {
-                return this.idHTD;
-            }
-            getIdHTDi() {
-                return this.idHTDi;
-            }
-            getIdPin() {
-                return this.idPin;
-            }
-            getpin() {
-                return this.pin;
+
+            displaySTN() {
+                this.decreasePin();
+                document.getElementById(this.idhienthi).innerHTML = `Soạn tin nhắn  <br/>
+                <textarea id='${this.idSTN}' rows="4" value="" cols="50"></textarea><br />
+                <button onclick="${this.name}.gui()">Gửi</button><br />`
             }
 
-            check() { }
+            displayHtD() {
+                this.decreasePin();
+                document.getElementById(this.idhienthi).innerHTML = `Hộp thư đến <br/>`;
+                for (let i = 0; i < this.HtD.length; i++) {
+                    let n = i + 1;
+                    document.getElementById(this.idhienthi).innerHTML += n + ". " + this.HtD[i] + '<br/>';
 
-            startus() { }
+                }
+            }
+
+            displayHtDi() {
+                this.decreasePin();
+                document.getElementById(this.idhienthi).innerHTML = `Hộp thư đi <br/>`;
+                for (let i = 0; i < this.HtDi.length; i++) {
+                    let n = i + 1;
+                    document.getElementById(this.idhienthi).innerHTML += n + ". " + this.HtDi[i] + '<br/>';
+                }
+            }
+
+
+            turnOff() {
+                document.getElementById(this.idMobile).innerHTML = `Điện thoại chưa bật <br/>
+                <button onclick=(${this.name}.turnOn())>ON</button>`;
+            }
+
+            turnOn() {
+                this.display();
+
+            }
 
             display() {
-
-                document.getElementById('display').innerHTML += `<div style="width:500;height: auto;">
-                <label>${this.name}</label><br />
-                <div id='${this.idPin}'>Pin: ${this.pin}</div>
-                <textarea id='${this.idSTN}' rows="4" value="" cols="50"></textarea><br />`;
-                document.getElementById('display').innerHTML += `
-                <input type="button" value="Gửi" onclick="${this.name}.gui()"/><br />
-                <span id='${this.idHTD}'>Hộp thư đến</span><br />
-                <span id='${this.idHTDi}'>Hộp thư đi</span><br />
-                <input type="button" value="Cắm sạc" onclick="${this.name}.sacpin()" /> <br/> 
-                </div>`;
+                let name = this.name.toUpperCase();
+                document.getElementById(this.idMobile).innerHTML = `
+                    <button onclick=(${this.name}.turnOff())>OFF</button>
+                    <div style="width:500;height: auto;">
+                        <label>${name}</label><br />
+                            <div id='${this.idPin}'>Pin: ${this.pin}</div>
+                            <div id='${this.idhienthi}' style="height:auto"></div>
+                        <button onclick="${this.name}.displaySTN()">Soạn tin nhắn</button> <br/>    
+                        <button id='${this.idHTD}' onclick="${this.name}.displayHtD()">Hộp thư đến</button><br />
+                        <button id='${this.idHTDi}' onclick="${this.name}.displayHtDi()">Hộp thư đi</button><br />
+                        <button onclick="${this.name}.sacpin()" />Sạc pin</button>                        <button onclick="${this.name}.ngatsacpin()" />Ngắt sạc pin</button> <br/>
+                    </div>
+                `;
 
             }
-            soantinnhan() {
-                this.Soanthao = document.getElementById(this.idSTN).value;
-            }
 
-            gui() {
+            decreasePin() {
                 this.pin--;
-                this.HtDi.push(this.Soanthao);
-                document.getElementById(this.idSTN).value = "";
                 document.getElementById(this.idPin).innerHTML = 'Pin: ' + this.pin;
             }
 
-            nhan() { }
+            connectToMobile(mobile) {
+                this.mobile = mobile;
+            }
 
+            gui(mobile) {
+                this.Soanthao = document.getElementById(this.idSTN).value;
+                document.getElementById(this.idSTN).value = "";
+                this.decreasePin();
+                this.HtDi.push(this.Soanthao);
+                this.mobile.decreasePin();
+                this.mobile.HtD.push(this.Soanthao);
+
+
+            }
+            isOnsetTimeOut;
             sacpin() {
                 if (this.pin < 100) {
                     this.pin++;
                     document.getElementById(this.idPin).innerHTML = 'Pin: ' + this.pin;
-                    setTimeout(() => this.sacpin(), 100);
-                }
+                    this.isOnsetTimeOut = setTimeout(() => this.sacpin(), 500);
+                } else alert('Pin đầy');
+            }
+
+            ngatsacpin() {
+                clearTimeout(this.isOnsetTimeOut);
+                document.getElementById(this.idPin).innerHTML = 'Pin: ' + this.pin;
             }
         }
-        let pin1 = pin2 = 10;
-        let samsung = new Mobile("samsung", 'pin1', 'soantinnhan1', 'hopthuden1', 'hopthudi1', pin1);
-        samsung.display();
-        let nokia = new Mobile("nokia", 'pin2', 'soantinnhan2', 'hopthuden2', 'hopthudi2', pin2);
-        nokia.display();
-
-
+        let pin1 = pin2 = 100;
+        let samsung = new Mobile("samsung", 'mobile1', 'hienthi1', 'pin1', 'soantinnhan1', 'hopthuden1', 'hopthudi1', pin1);
+        samsung.turnOff();
+        let nokia = new Mobile("nokia", 'mobile2', 'hienthi2', 'pin2', 'soantinnhan2', 'hopthuden2', 'hopthudi2', pin2);
+        nokia.turnOff();
+        samsung.connectToMobile(nokia);
+        nokia.connectToMobile(samsung);
     </script>
 </body>
 
