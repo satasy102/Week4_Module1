@@ -96,9 +96,9 @@
             gui(mobile) {
                 this.Soanthao = document.getElementById(this.idSTN).value;
                 document.getElementById(this.idSTN).value = "";
+                this.HtDi.push(this.Soanthao);
                 this.decreasePin();
                 if (this.mobile.check) {
-                    this.HtDi.push(this.Soanthao);
                     this.mobile.decreasePin();
                     this.mobile.HtD.push(this.Soanthao);
                 }
@@ -127,7 +127,7 @@
 
         samsung.connectToMobile(nokia);
         nokia.connectToMobile(samsung);
-        
+
     </script>
 </body>
 
